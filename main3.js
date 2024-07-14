@@ -285,7 +285,3 @@ const freddy = new TeacherStudent({
     email: 'f@gep.com',
     instagram: 'freddiervega',
 })
-
-
-  
-  
