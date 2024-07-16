@@ -1,19 +1,19 @@
-const obj1 = {
+/* const obj1 = {
     a: "a",
     b: "b",
     c: {
         d: "d",
         e: "e"
     },
-    /* editA(){
+    editA(){
         this.a = "AAA"
-    } */
-}
+    }
+} */
 
-const stringifiedComplexObj = JSON.stringify(obj1);
+/* const stringifiedComplexObj = JSON.stringify(obj1);
 const obj2 = JSON.parse(stringifiedComplexObj);
 
-console.log({obj1, obj2, stringifiedComplexObj});
+console.log({obj1, obj2, stringifiedComplexObj}); */
 
 
 /*
@@ -42,3 +42,30 @@ const obj4 = Object.create(obj1)
 
 console.log(obj4);  */
 
+class Vocales{
+    constructor({
+        a, b, c = {
+            d,
+            e
+        }
+    }){
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+}
+
+const obj1 = new Vocales({
+    a: "a",
+    b: "b",
+    c: {
+        d: "d",
+        e: "e"
+    }
+});
+
+const stringifiedComplexObj = JSON.stringify(obj1);
+
+const obj2 = JSON.parse(stringifiedComplexObj);
+
+console.log({obj1, obj2, stringifiedComplexObj});
