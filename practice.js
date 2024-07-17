@@ -40,7 +40,7 @@ console.log(obj3);
 
 const obj4 = Object.create(obj1)
 
-console.log(obj4);  */
+console.log(obj4);  
 
 class Vocales{
     constructor({
@@ -68,4 +68,4 @@ const stringifiedComplexObj = JSON.stringify(obj1);
 
 const obj2 = JSON.parse(stringifiedComplexObj);
 
-console.log({obj1, obj2, stringifiedComplexObj});
+console.log({obj1, obj2, stringifiedComplexObj});  */
