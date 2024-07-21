@@ -25,15 +25,25 @@ function createStudent({
         },
         approvedCourses,
         learningPaths,
-        readName(){
+        get name(){
+            return private["_name"];
+        },
+        set name(newName){
+            if(newName.length != 0){
+                private["_name"] = newName;
+            } else{
+                console.warn("Tu nombre debe tener al menos 1 caracter");
+            }
+        }
+    /*  readName(){
             return private["_name"];
         },
         changeName(newName){
             private["_name"] = newName;
-        }
+        }  */
     }
 
-    Object.defineProperty(public, "readName", {
+    /* Object.defineProperty(public, "readName", {
         writable: false,
         configurable: false
     })
@@ -41,7 +51,7 @@ function createStudent({
     Object.defineProperty(public, "changeName", {
         writable: false,
         configurable: false
-    })
+    }) */
     
     return public;
 }
