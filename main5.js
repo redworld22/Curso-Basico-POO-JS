@@ -41,11 +41,15 @@ function requiredParam(param){
     throw new Error(param + " es obligatorio");
 }
 
-function createLearningPath({
+function LearningPath({
     name = requiredParam("name"),
     courses = []
 } = {}){
-   const private = {
+
+    this.name = name;
+    this.courses = courses;
+
+/* const private = {
     "_name": name,
     "_courses": courses,
    };
@@ -68,10 +72,10 @@ function createLearningPath({
     }
    };
 
-   return public;
+   return public;  */
 }
 
-function createStudent({
+function Student({
     name = requiredParam("name"),
     age,
     email = requiredParam("email"),
@@ -82,7 +86,27 @@ function createStudent({
     learningPaths = []
 } = {}){
 
-    const private = {
+    this.name = name;
+    this.age = age;
+    this.email = email;
+    this.approvedCourses = approvedCourses;
+    this.socialMedia = {
+        twitter,
+        instagram,
+        facebook
+    }
+
+    if(isArray(learningPaths)){
+        this.learningPaths = []
+
+        for(let learningPathIndex in learningPaths){
+            if(learningPaths[learningPathIndex] instanceof LearningPath){
+                this.learningPaths.push(learningPaths[learningPathIndex])
+            }
+        }
+    }
+
+/*  const private = {
         "_name": name,
         "_learningPaths": learningPaths
     };
@@ -133,18 +157,38 @@ function createStudent({
         }
     }
     
-    return public;
+    return public;  */
 }
 
-const juan = createStudent({
+const escuelaWeb = new LearningPath ({
+    name: "Escuela de Desarrollo Web",
+    courses: ["Curso Definitivo de HTML y CSS", "Curso De CSS Grid Básico", "Curso de Programación Orientada a Objetos (POO)", "Curso de La Terminal y Línea de Comandos"]
+})
+
+const escuelaData = new LearningPath ({
+    name: "Escuela de Ciencia de Datos e Inteligencia Artificial",
+    courses: ["Fundamento de Python", "Curso de Fundamentos de Matemáticas", "Curso de Principios de Visualización de Datos", "Curso de Fundamentos de Base de Datos"]
+})
+
+const juan = new Student({
     name: "juanito",
     age: 18,
-    email: "juanito@trucupey.com"
+    email: "juanito@trucupey.com",
+    learningPaths: [
+        escuelaWeb,
+        escuelaData,
+        {
+            name: "Escuela Impostora",
+            courses: ["Curso para ir al espacio", "Curso para trabajar en Tecnología"]
+        }
+    ]
 }); // {}
 
-juan.learningPaths = { 
-    name: "Escuela de Desarrollo Web",
-    courses: ["Curso Básico de POO"]
+const estudianteImpostor = {
+    name: "Joe",
+    email: 'imperialismototal@stablishment.com'
 }
 
-console.log(juan.learningPaths);
+console.log(juan instanceof Student);
+console.log(estudianteImpostor instanceof Student);
+console.log(juan);
