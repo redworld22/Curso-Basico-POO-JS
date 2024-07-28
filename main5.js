@@ -37,6 +37,46 @@ function deepCopy(subject){
     return copySubject;
 }
 
+function SuperObject(){}
+
+SuperObject.isObject = function (subject){
+    if(subject === null || Array.isArray(subject)){
+        return false;
+    }
+    return typeof subject == "object";
+}
+
+SuperObject.deepCopy = function (subject){
+    let copySubject;
+
+    const subjectIsObject = isObject(subject);
+    const subjectIsArray = isArray(subject);
+    
+    if(subjectIsArray){
+        copySubject = [];
+    } else if (subjectIsObject){
+        copySubject = {};
+    } else{
+        return subject;
+    }
+
+    for (key in subject) {
+        const keyIsObject = isObject(subject[key])
+
+        if(keyIsObject){
+            copySubject[key] = deepCopy(subject[key]);
+        } else{
+            if(subjectIsArray){
+                copySubject.push(subject[key]);
+            } else {
+                copySubject[key] = subject[key];
+            }
+        }
+    }
+
+    return copySubject;
+}
+
 function requiredParam(param){
     throw new Error(param + " es obligatorio");
 }
@@ -122,3 +162,15 @@ const estudianteImpostor = {
 console.log(juan instanceof Student);
 console.log(estudianteImpostor instanceof Student);
 console.log(juan);
+
+console.log(SuperObject.isObject({ name: "Red", age: 42}));
+console.log(SuperObject.isObject(["Red"]));
+const copia = SuperObject.deepCopy({ a: "a",
+    b: "bb",
+    c: {
+        e: "e",
+        d: "d"
+    }
+});
+
+console.log(copia);
